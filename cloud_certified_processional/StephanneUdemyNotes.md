@@ -839,25 +839,21 @@ Banefits :
 - **Global edge n/w**
 - Files are cached for later
 - **Great for static content**
-
 - Origin                       
     - S3 bucket
           - For Distributed file and caching at edge loc
           - Enhanced security wid CloudFront Origin Access Identity (OAI)
           - CloudFront can be used as ingress (to upload file to S3)
-
 - Custom Origin
     - App Load Balancer
     - EC2 instance
     - S3 website(must first enable bucket as a static S3 website)
     - Any HTTP backend
-
 - S3 CRR
     - Must be set up for each region
     - Files are updated in real time
     - Read only
     - Great for dynamic content that needs to be available at low latency in few regions
-
 
 ### S3 Accelerate xfer
 - Increases transfer speed by transferring file to AWS edge location, which will forward data to S3 bucket in target region
