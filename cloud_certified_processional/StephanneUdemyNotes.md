@@ -25,7 +25,7 @@ It is on demand delivery of compute power,database storage, applications and oth
    
 - SaaS
     - Complete product is run and managed by AWS
-    - eg. Rekognition, Lambda, Gmail , Dropbox
+    - eg. Rekognition, Lambda, Gmail , Dropbox,S3
 
 ### Pricing in the cloud
 Pricing is dependent on :
@@ -33,7 +33,7 @@ Pricing is dependent on :
 - Compute
 - Storage
 - Data transfer out of the cloud
-- In most cases, there is no charge for inbound data transfer or data transfer between other AWS services within the same region. 
+- In most cases, there is no charge for data transfer between other AWS services within the same region. 
 - Outbound data transfer is aggregated across services and then charged at the outbound data transfer rate.
 
 ---
@@ -45,7 +45,7 @@ Pricing is dependent on :
 - Availability Zones
     - Contains data centers(DC)
         - Min : `1`
-        - DC has redundant power , n/wing and connectivity
+        - DC has redundant power , n/w and connectivity
 - Points of presence 
     - Content delivery as close to users
     - Total : `216`
@@ -62,6 +62,15 @@ Pricing is dependent on :
 - Roles can be assigned to a user also
 - **Global free** service
 - User and groups are assigned via json documents c/a policies
+- Policy, when associated with an identity or resource, defines their permissions.
+- AWS evaluates these policies when an IAM principal (user or role) makes a request. 
+- Permissions in the policies determine whether the request is allowed or denied.
+- Each policy consists of:
+	- Actions: What actions to allow or deny.
+	- Resources: Which resources to allow or deny the action on.
+	- Effect: What will be the effect when the user requests access—either allow or deny.
+	- Conditions: Permissions are granted to IAM identities (users, groups, and roles) to determine whether they are authorized to perform an action or not.
+- When you assume a role, it provides you with temporary security credentials for your role session. You can use roles to delegate access to users, applications, or services that don't normally have access to your AWS resources.
 
 ### Multi Factor Authentication
 Password + Device specific token
@@ -103,7 +112,7 @@ AWS can be accessed by 3 modes-
 - Use and enforce MFA
 - Create and use roles to provide permissions to AWS Services
 - Use access key for programmatic access (CLI/SDK)
-- Audit permissions using Cred Report
+- Audit permissions using Credential Report
 
 ---
 
@@ -117,8 +126,20 @@ Provides option to chose
 - Firewall rules
 - Bootstarp script (EC2 User Data)
 
+- Allow you to install and run custom relational database
+
 ### Purchasing Option
 Pay for what u choose
+
+
+### Pricing depends on
+EC2 instance pricing varies depending on many variables:
+- The buying option (On-demand, Reserved, Spot, Dedicated)
+- Selected AMI
+- Selected instance type
+- Region
+- Data Transfer in/out
+- Storage capacity
 
 ### Types of EC2
 
@@ -129,6 +150,7 @@ Pay for what u choose
 - Short term , uninterrupted load
 - Most expensive
 - Predictable pricing
+- Remove the need to buy “safety net” capacity to handle periodic traffic spikes. 
 
 #### EC2 Reserved Instances
  - `72 %` discount
@@ -167,7 +189,7 @@ Pay for what u choose
  - Dedicated host
  - `Allocated for 3 years`
  - Very expensive
- - Address compliance rqmnts
+ - Address compliance requirements
  - Reduce cost by allowing you to have 2 server outbound liscences
  - Useful for `Bring your own license(BYOL)`
  - Control instance placement
@@ -188,7 +210,6 @@ Pay for what u choose
   - Data security
   - Patching EC2 instances
   - Service and Communication Protection and Zone security
-
 ---
 
 ## EC2 Instance Storage
@@ -197,24 +218,25 @@ Pay for what u choose
 - **Block Storage**
 - Like a **network drive** that can be attached
 - Persist data even after termination
-- Bound to specific availability zone
 - EBS Volume in one zone cannot be attached to another . It needs to be done via snapshot
 - Uses n/w to communicate
 - **Region specific**
 - **Single AZ**
 - Can copy snapshots across region/AZ
-- Charged by **Volume Type** , **Provisioned iops** and **Provisioned storage volume**
+- Charged by **Volume Type** , **Provisioned iops(Input/Output Operations/second** and **Provisioned storage volume**
 - Uses n/w to communicate and reduces latency
 - It can be detached from one EC2 instance and attached to another one
 - To create a snapshot, it is not recommended to detach a volume, but recommended
 - Have a provisioned capacity (size in GB and vol)
     - You get billed for all provisioned capacity
     - You can **increase capacity of drive over time**
+-  Primary storage device for data that requires frequent and granular updates. 
+- Amazon EBS is the recommended storage option when you run a database on an EC2 instance. 
 
 ### AMI
 - Created **Region specific**
 - Can be copied across regions
-- Building an AMI also causes snapshots to be created
+- Building an AMI also causes EBS snapshots to be created
 - **Server-less service**
 - Customization of EC2
 
@@ -235,8 +257,10 @@ Pay for what u choose
 - **Thrice the price** , pay per use
 - **Shared by everything that is mounted on it**
 - **Only wid linux ec2 instances in multi AZ**
+- EC2 instances can access files on an EFS file system across many Availability Zones, regions and VPCs
 - Scalable and expensive
 - No capacity planning
+- Can be directly used with on-premises systems
 
 ### Shared Responsibility for EC2 Storage
 
@@ -384,6 +408,7 @@ Pay for what u choose
             - Live replication between prod and test a/cs
 
 ### S3 Storage Class
+
 #### Standard
 - **Frequently access data**
 - Low latency and high thruput
@@ -398,6 +423,7 @@ Pay for what u choose
     - Frequent access
     - Infrequent access
 - **Resilient against events that impact entire AZ**
+- ** No retrieval fees**
 
 #### Standard Infrequent Access(IA)
 - **Less frequent access data but rapid access**
@@ -439,16 +465,6 @@ Pay for what u choose
 - `180 days` of min storage duration 
 - `40 KB` of min cap/obj fee 
 
-### Pricing depends on
-EC2 instance pricing varies depending on many variables:
-- The buying option (On-demand, Reserved, Spot, Dedicated)
-- Selected AMI
-- Selected instance type
-- Region
-- Data Transfer in/out
-- Storage capacity
-
-
 ### S3 Storage Class Comparision
 Using lifecycle config , storage class can be changed
 - Availability zones
@@ -457,7 +473,7 @@ Using lifecycle config , storage class can be changed
     
 - Min Capacity charge / obj
     - N/A - Std, Intelligent Tiering
-    - 128 kb - Infreq uent Access
+    - 128 kb - Infrequent Access
     - 40 kb - Glacier , Deep archive
     
 - Min storage duration charge   
@@ -470,12 +486,14 @@ Using lifecycle config , storage class can be changed
     - N/A - Std , Intelligent Tiering
     - Rest all - /GB retrieved
 
+## Physical Data Transport
+
 ### Snowball
 
 - **Physical data xfer in /out of AWS**
 - **TB and PB of data**
 - Pay/data Xfer job
-- If it takes 1 week to xfer data , then use snowball
+- If it takes **1 week to xfer data** , then use snowball
 - Use cases : Large data cloub migrations , DC decommision, DR
 - Process is
     - Request AWS device
@@ -499,12 +517,16 @@ Using lifecycle config , storage class can be changed
 - Has **100 PB** cap
 - **Better than Snowball if you xfer > than 10 PB**
 
+### Conversion matrix 
+- PB= 1000 TB
+- ExaByte = 1000 PB
+
 ---
 
 ### Storage Gateway
 - **Bridge between on-prem data and cloud data in S3**
 - **Expose S3 data on prem**
-- Hybrid service to allow on prem to use AWS cloud
+- **Hybrid service** to allow on prem to use AWS cloud
 - `3 types` of Stotage Gateway are :
     - Volume
     - File
@@ -524,18 +546,21 @@ Using lifecycle config , storage class can be changed
 
 ### RDS
     - **Relational**
-          - PostGres, MySQL, Orcale, SQL Server , Aurora
+          - PostGres, MySQL, Oracle, SQL Server , Aurora
     - **Read replicas** for performance improvement
+	- **Read Replicas** improves database scalability
+	- Read Replicas features facilitates offloading of database read activity
     - **Multi AZ (optional - need to configure)**
-    - _ + | scaling
+    - _ + | scaling of instance size and storage
     - **Storage backed up by EBS**
     - Automated provisioning , OS patching
-    - **Continuous backup and restore to specific times(Point in time references)**
+    - **Continuous backup and restore to specific times with a granularity of as little as 5 minutes(Point in time references)**
     - Dashboard monitoring
     - Disadv : cannot SSH into EC2
     - Maintenace windows for upgrades
+	- AWS performs DB set up and management of OS
 
-###Aurora
+### Aurora
     - MySQL and PostGres
     - **5 X perf over MySQL & 3 X perf over postGres**
     - Storage auto grows in increments of 10 GB upto 64 TB
@@ -544,12 +569,14 @@ Using lifecycle config , storage class can be changed
 
 ### Elastic Cache
     - **Mem cached or Redis**
-    - In mem DB and high perf
+    - In mem DB and high performance
     - Low latency
     - **Helps reduce load off database for read intensive workloads**
+	- Improves web application performance
    
 ### Dynamo DB
     - **Fully managed and highly available across 3 AZ**
+	- ** Multi AZ**
     - No SQL
     - **Automatically Scales to massive workloads**
     - **Serverless**
@@ -560,6 +587,11 @@ Using lifecycle config , storage class can be changed
     - Low cost and auto scaling capabilities
     - Integrated with IAM
     - **K/V DB**
+    - **DynamoDB Accelerator (DynamoDB DAX)** is an in-memory cache for DynamoDB that reduces response times from milliseconds to microseconds.
+	- **Global Tables** : Name of the DynamoDB replication capability that provides fast read \ write performance for globally deployed applications. 
+	- DynamoDB global tables are ideal for massively scaled applications with globally dispersed users. 
+	- Global tables provide automatic replication to AWS Regions world-wide. 
+	- They enable you to deliver low-latency data access to your users no matter where they are located.
 
 ### RedShift
     - **OLAP**
@@ -594,6 +626,7 @@ Using lifecycle config , storage class can be changed
 	- Self-healing
     - Source DB remains available during migration
     - Spports homogenous and heterogeneous migration
+	- The AWS Database Migration Service can migrate your data to and from the most widely used commercial and open-source databases.
 
 ---
 
@@ -644,6 +677,9 @@ Using lifecycle config , storage class can be changed
 - **Automated scaling**
 - Shorter execution of time
 - **Invocation time** - `upto 15 mins`
+- **Regional**
+- Can support any language using API
+- Natively supports # of programming languages like Java, Python , NodeJS
 
 Banefits :
 - **Pay/request** or **Pay/compute time**
@@ -685,16 +721,17 @@ Banefits :
     - No time limit
     - Any runtime
     - **Rely on EBS/instance store for disk space**
-    - **Relies on EC2**
-    
+    - **Relies on EC2**    
 ---
+
 
 ## Amazon Lightsail
 
 - Virtual servers, storage, DB , n/w
 - Low and predictable pricing
-- **High availability but no autoscaling**
+- **High availability but NO autoscaling**
 - Great for people with little cloud experience
+- Easiest way to launch and manage a Virtual Private Server (VPS) in the AWS Cloud
 - Use cases
     - Simple web app
     - websites
@@ -719,7 +756,7 @@ Banefits :
     - Saving strategy : In dev , you can automation deletion of templates at `5 pm` and recreate at `8 am`
 
 ### Productivity
-    - Ability to rec-create and destory resouces on cloud on the fly
+    - Ability to recreate and destory resouces on cloud on the fly
     - Automated generation of diagrams for ur template
     - Declerative Programming - No need to figure out ordering and orchestration
 
@@ -730,7 +767,7 @@ Banefits :
 ### Suppport
     - Support all resources
     - You can use custom resources for the resources that are not supported
-	- Can be used to deploy to many AWS regions and accounts
+	- **Can be used to deploy to many AWS regions and accounts**
 
 ---
 
@@ -741,15 +778,19 @@ Banefits :
 - All services are in one view
 - **We still have full control over config**
 - **PaaS**
-- **Free but need to pay for underslying services**
+- **Free but need to pay for underlying services**
 - Use all the components seen in material
-- App/pltform focussed
+- App/platform focussed
 - Use Cloud formation underneath
 - Managed Service
-    - Instance config/OS is handled by Beanstalk
-    - Deployment strategy is configurable but performed by beanstalk
+    - **Instance config/OS is handled by Beanstalk**
+    - **Deployment strategy is configurable but performed by Beanstalk**
 - Just the app code is responsibility of developer
-- Deploy code consistently wih known architecure
+- Deploy code consistently with known architecure
+- AWS Elastic Beanstalk is the fastest and simplest way to get web applications up and running on AWS
+- Developers simply upload their application code and the service automatically handles all the details such as resource provisioning, load balancing, auto-scaling, and monitoring
+- Elastic Beanstalk is an end-to-end application platform, unlike CodeDeploy, which is targeted at code deployment automation for any environment (Development, Testing, Production). 
+- It cannot be used to automatically deploy code to an Amazon EC2 instance.
 
 ### 3 Architectural modes
     Single instance deployment : dev
@@ -771,7 +812,10 @@ Banefits :
 - Works with EC2
 - Works with on-prem
 - **Hybrid**
-- Services/Instances must be provisioned ahead of time with CodeDeploy agent
+- Services/Instances must be provisioned ahead of time with **CodeDeploy agent**
+- AWS CodeDeploy is a service that automates application deployments to a variety of compute services including Amazon EC2, AWS Fargate, AWS Lambda, and on-premises instances. 
+- CodeDeploy fully automates your application deployments eliminating the need for manual operations.
+- CodeDeploy protects your application from downtime during deployments through rolling updates and deployment health tracking.
 
 ---
 
@@ -782,10 +826,10 @@ Banefits :
 - **Hybrid AWS** Service
 - **Get operational insight about the state of your infrastructure**
 - Suite of 10 + products
-- Windows + Linux
+- **Windows + Linux**
 - Important features
-    - Patching automation for enhanced compliance
-    - Run commands across entire fleet
+    - **Patching automation for enhanced compliance**
+    - **Run commands across entire fleet**
     - **Stores param config with Param store**
 - Need to install `SSM agent` onto systems we control
 - **Installed by default on Amazon Linux AMI**
@@ -799,7 +843,7 @@ Banefits :
 - **Chef and Puppet** perform server config automatically or repetitive actions
 - Work gr8 with EC2 and on prem
 - OpsWorks = Managed chef + Puppet
-- Alternative to SSM
+- **Alternative to SSM**
 - **Only provision std resources**
     - EC2 instance, DB , Volume, LB
     
@@ -813,13 +857,17 @@ Banefits :
 - **Managed DNS**
 - DNS is collection of rules/records which helps client determine how to reach server
 - **Domain Name Registeration**
+- You can also use geolocation routing to restrict the distribution of content to only the locations in which you have distribution rights
+- You can use Route 53 geolocation routing policy to block certain geographies.
+- Provides health check and monitoring
+- Does not do ip routing
 - Policies
     - Simple Routing Policy
           - **No health checks**
           - Web browser will query to 53 and get IP
     - Weighted
-          - Allows to distribute traffic to multiple AZ
-          - Weights are assigned to instances and accordingly traffic is routed
+          - Allows to distribute traffic to **multiple AZ**
+          - &&Weights are assigned to instances** and accordingly traffic is routed
     - Latency
           - If user is close then request will be routed to that server
     - Failover
@@ -867,7 +915,7 @@ Banefits :
 - Improves perf over wide range of apps over TCP or UDP
 - Good for **HTTP use cases that requires static IP address**
 - Good for **HTTP use cases that requires deterministic , fast regional failover**
-- Lverage AWS n/w to optimize route to app (60 % improvement)
+- Leverage AWS n/w to optimize route to app (60 % improvement)
 - `2 Anycast ip` are created for app and traffic is sent thru edge loc
 - **Edge loc send the traffic to app**
 
@@ -943,12 +991,12 @@ App -> SQS -> App
        
 ### CloudWatch Alarms
 - **Trigger notification for any metric**
-- Alarm actions
-    - AutoScaling : Increase or descrease EC2 instances "desired" count
+- **Alarm** actions
+    - AutoScaling : Increase or decrease EC2 instances "desired" count
     - EC2 Actions : Stop, terminate , reboot or recover EC2 instance
-    - SNS notifications : Sends notification to SNS topic
+    - SNS notifications : **Sends notification to SNS topic**
 - Various options ( samping , % max , min, etc)
-- Can choose a period on which to evaluate an alarm
+- Can **choose a period on which to evaluate an alarm**
 - Alarm staes : OK, INSUFFICIENT_DATA ALARM
 
 ### CloudWatch Logs
@@ -961,11 +1009,9 @@ App -> SQS -> App
     - Roue53 : Log DNS queries
 - Enables **Realtime monitoring of logs**
 - Adjustable CloudWatch Logs alarm
-
-### CloudWatch Logs from EC2
-          - By deafult , no logs will be sent to Cloudwatch
-          - You need to **Run a cloudwatch agent to push log files you want**
-          - **Cloudwatch log agents can be set up on prem too**
+- By deafult , no logs will be sent to Cloudwatch
+- You need to **Run a cloudwatch agent to push log files you want**
+- **Cloudwatch log agents can be set up on prem too**
 
 ### CloudWatch Events
 - Schedule : Cron jobs
@@ -1019,7 +1065,7 @@ App -> SQS -> App
 
 ## CloudTrail vs CloudWatch vs Config
 - CloudTrail : Think account specific activity and audit
-- CloudWatch : Account specfic activity and audit 
+- CloudWatch : Think resource performance monitoring, events, and alerts; think CloudWatch
 - Config : Think resource specific change history, audit and compliance
           
 ---
@@ -1037,7 +1083,7 @@ App -> SQS -> App
 - Private Subnet : Not accessible from internet . eg . Database
 
 ### Route Tables
-- Define access to internet and betn subnets
+- Define access to internet and between subnets
 
 ---
 
@@ -1065,7 +1111,6 @@ App -> SQS -> App
 - Automatically **applies to all instances in a subnet**
 - Rules only include ip addresses
 - Process rules in number of order when deciding whther to allow traffic
-- Automatically applies to all instances in the subnet it is associated with(hence , u do not have to rely on usersto specify sec grp)
 
 ### Security Group   
 - 2nd line of defense
@@ -1288,6 +1333,7 @@ Patch management, config management , awareness and training
 - Find objects ,people,text,scenes in images and video using ML
 - **Facial analysis and facial search**  to do user verificaton , people counting
 - Creates DB of familar faces or compare against celebrities
+- **Regional**
 - Use Cases
     - Labeling
     - Content Moderation
@@ -1370,57 +1416,65 @@ Phone call -> Connect --Stream-->Lex-->Lambda--> CRM
     - Save when you reserve: minimize risks, predictably manage budgets, comply with long term requirements
           - Reservations are available for EC2 Reserved Instances, DynamoDB Reserved Capacity, ElaticCache Resrved Nodes, RDS Reserved Instance, Redshift Reserved Nodes
     - Pay less by using more : Volume based discount
-    - Pay less as AWS grows
-    
-----
+    - Pay less as AWS grows   
+---
+
 ## Billing and Costing Tools
 
 ### Estimating cost
 
-    #### TCO Calc
-          - Reduce need to invest in large Capital Expense and provide Pay as u go model
-          - Compare cost of app in **on-prem vs AWS**: Server , Storage, IT labour , N/W
-          - Allows you to estimate cost savings when using AWS and provide detailed set of reports
-    #### Simply monthly calc/Pricing calc
-          - Estimate **cost of architectural solutions**
-          - Replaced by AWS Pricing Calculator
-          - Deprecated
+- TCO Calc
+	- Reduce need to invest in large Capital Expense and provide Pay as u go model
+    - Compare cost of app in **on-prem vs AWS**: Server , Storage, IT labour , N/W
+    - Allows you to estimate cost savings when using AWS and provide detailed set of reports
+	
+- Simply monthly calc/Pricing calc
+    - Estimate **cost of architectural solutions**
+    - Replaced by AWS Pricing Calculator
+    - Deprecated
+	- Provides an estimate of usage charges for AWS services based on certain information you provide. 
+	- It helps customers and prospects estimate their monthly AWS bill more efficiently.
+	- This calculator provides a visual interface to enter details about the AWS services that you plan to use and then it outputs a detailed estimate of the monthly AWS bill. 
 
-### Tracking cost in cloud
+### Tracking Cost
 
-    #### Cost and Usage Report
-          - **Dive deeper into ur AWS a/c and usage**
-          - Contains **most comprehensive set of AWS cost and usage data available , including additional metadata about AWS services, pricing and reservations**
-          - List AWS usage for each service category used by account, its IAM users in hourly or daily line items as well as any tags that u have activated for cost allocation purposes
-          - can be integrated with Athena . Redshift , Quicksight
-    #### Cost Explorer
-          - **Visualize understand and mange your AWS cost and usage over time**
-          - Create custom reports that analyze cost and usage data
-          - **Analyze ur data at a high level: total cost and usage across all accounts**
-          - Or Monthly, hourly , resource level granularity
-          - Choose an optimal savings plan
-          - **Forcast usage upto 3 months based on prev usage**
-		  - Customers **can receive Savings Plan recommendations** at the member (linked) account level in addition to the existing AWS organization-level recommendations in AWS Cost Explorer.
-		  - AWS Cost Explorer lets you explore your AWS costs and usage at both **a high level and at a detailed level of analysis**, and empowering you to dive deeper using several filtering dimensions (e.g., AWS Service, Region, Linked Account, etc.) 
-		  - AWS Cost Explorer also **gives you access to a set of default reports to help you get started, while also allowing you to create custom reports from scratch.**
+- Cost and Usage Report
+	- **Dive deeper into ur AWS a/c and usage**
+    - Contains **most comprehensive set of AWS cost and usage data available , including additional metadata about AWS services, pricing and reservations**
+    - List AWS usage for each service category used by account, its IAM users in hourly or daily line items as well as any tags that u have activated for cost allocation purposes
+    - Can be integrated with Athena . Redshift , Quicksight
+	- Allows you to see bill of past month
+	- You can use Cost and Usage Reports to publish your AWS billing reports to an Amazon Simple Storage Service (Amazon S3) bucket that you own. 
+	- You can receive reports that break down your costs by the hour or month, by product or product resource, or by tags that you define yourself.
+
+- Cost Explorer
+   - **Visualize understand and mange your AWS cost and usage over time**
+   - Create custom reports that analyze cost and usage data
+   - **Analyze ur data at a high level: total cost and usage across all accounts**
+   - Or Monthly, hourly , resource level granularity
+   - Choose an optimal savings plan
+   - **Forcast usage upto 12 months based on prev usage**
+   - Customers **can receive Savings Plan recommendations** at the member (linked) account level in addition to the existing AWS organization-level recommendations
+   - Lets you explore your AWS costs and usage at both **a high level and at a detailed level of analysis**, and empowering you to dive deeper using several filtering dimensions (e.g., AWS Service, Region, Linked Account, etc.) 
+   - AWS Cost Explorer also **gives you access to a set of default reports to help you get started, while also allowing you to create custom reports from scratch.**
 		  
-	#### Cost Allocation Tags
-          - Use **cost allocation tags to track AWS cost at detailed level**
-          - AWS generated tags
-               - Automatically allowed to resource you create
-               - Starts with prefix aws
-          - User defined tags
-               - Defined by user
-               - Starts with prefix user
-          - Tagging and Resource group
-               - Tags are used for o**rganizing resources**
-                    EC2
-                    RDS, VPC resource,Route 53, IAM users
-                    Resouces created by CloudFormation are tagged the same way
-               - **Tags can be used to create Resource Groups**
+- Cost Allocation Tags
+   - Use **cost allocation tags to track AWS cost at detailed level**
+   - AWS generated tags
+		- Automatically allowed to resource you create
+		- Starts with prefix aws
+   - User defined tags
+        - Defined by user
+        - Starts with prefix user
+   - Tagging and Resource group
+        - Tags are used for **organizing resources**
+			- EC2
+			- RDS, VPC resource,Route 53, IAM users
+			- Resouces created by CloudFormation are tagged the same way
+        - **Tags can be used to create Resource Groups**
 			   
-    #### Billing Dashboard
-               - Provides recommendation on savings plan
+- Billing Dashboard
+	- Provides recommendation on savings plan
 
 ### Monitoring against cost plans
     - Billing alarms
@@ -1428,6 +1482,7 @@ Phone call -> Connect --Stream-->Lex-->Lambda--> CRM
           - Billing data are for overall worldwide AWS costs
           - Its for **actual cost and not for projected cost**
           - Intended a simple alarm (not as powerful as AWS Budgets)
+		  
     - Budgets
           - **Create budget and send alarms when Cost exceeds the budget**
           - 3 Types
@@ -1443,12 +1498,11 @@ Phone call -> Connect --Stream-->Lex-->Lambda--> CRM
           - Same options as AWS Cost Explorer 
 		  - You can also use AWS Budgets to **set reservation utilization or coverage targets and receive alerts when your utilization drops below the threshold you define**
 		  - AWS Budgets gives you the ability to set custom budgets that **alert you when your costs or usage exceed (or are forecasted to exceed) your budgeted amount.** 
-		  - You can **define a utilization threshold and receive alerts when your RI usage falls below that threshol**d. This **lets you see if your RIs are unused or under-utilized.**
-		  - Reservation alerts are supported for Amazon EC2, Amazon RDS, Amazon Redshift, Amazon ElastiCache, and Amazon Elasticsearch reservations.
-          
+		  - You can **define a utilization threshold and receive alerts when your RI usage falls below that threshold.**
+		  - Reservation alerts are supported for Amazon EC2, Amazon RDS, Amazon Redshift, Amazon ElastiCache, and Amazon Elasticsearch reservations.         
  ---
  
- ## AWS Trusted Advisor
+## AWS Trusted Advisor
     No need to install anything -High level AWS account assessment
     - Account assessment
     - **Analyse accounts and provide recommendations**
@@ -1460,7 +1514,6 @@ Phone call -> Connect --Stream-->Lex-->Lambda--> CRM
           - Business and Enterprise support plans
           - Ability to **set cloudwatch alarms when reaching limits**
           - **Programmatic access using AWS Support APIs**
-
 
 ### Examples
     - **Cost Optimization**
@@ -1500,6 +1553,8 @@ AWS Ecosystem
 - **Unlimited cases/1  primary contact**
 - General guidance < 24 hrs
 - System impaired < 12 hrs
+- Testing or doing early development on AWS and want the ability to get email-based technical support during business hours. 
+- Supports general guidance on how services can be used for various use cases, workloads, or applications
 
 ### Business
 - Intended to be used when you have **Prod workloads**
@@ -1513,7 +1568,8 @@ AWS Ecosystem
     - Prod system impaired - < 4 hrs
     - Prod system down - < 1 hrs
 - Provides guidance ,configuration and troublshootng of **AWS interoperability with 3rd party software**  
-   
+- 24x7 phone, email and chat access to technical support and architectural guidance in the context of your specific use-cases.
+
 ### Enterprise
 
 - All of Business Support Plan +
@@ -1669,13 +1725,14 @@ eg.
 
 ### Reliability
 - **Ability of system to recover from service or infrastructure disruptions**
-- **Dynamicaaly acquire compute resources to meet demand and mitigate disruptions such as misconfig or transient n/w issues**
+- **Dynamically acquire compute resources to meet demand and mitigate disruptions such as misconfig or transient n/w issues**
 
 #### Design Principles
 - Test Recovery procedures
 - Stop guesssing capacity needs : Use auto scaling
 - Scale horizontally : Distribute requests so that there is no common point of failre
 - Manage chnage in automation : Use automation to make chnges in infra
+- Automaticaaly tecover from failure
 
 #### Foundation
 - IAM
@@ -1742,6 +1799,13 @@ eg-
   - SaaS
   - Containers
 - If you buy , it goes to AWS bill
+The AWS Marketplace provides value to buyers in several ways:
+
+1- It simplifies software licensing and procurement with flexible pricing options and multiple deployment methods. Flexible pricing options include free trial, hourly, monthly, annual, multi-year, and BYOL.
+
+2- Customers can quickly launch pre-configured software with just a few clicks, and choose software solutions in AMI and SaaS formats, as well as other formats.
+
+3- It ensures that products are scanned periodically for known vulnerabilities, malware, default passwords, and other security-related concerns.
 
 ## AWS Training
 - Digital and Classroom
@@ -1822,27 +1886,87 @@ eg-
 - AWS Migration Hub provides a single location to track the progress of application migrations across multiple AWS and partner solutions.
 
 ##  Amazon Cloud Directory
--  Cloud-native, highly scalable, high-performance directory service that provides web-based directories to make it easy for you to organize and manage all your application resources such as users, groups, locations, devices, and policies, and the rich relationships between them.
+- Cloud-native, highly scalable, high-performance directory service that provides web-based directories to make it easy for you to organize and manage all your application resources such as users, groups, locations, devices, and policies, and the rich relationships between them.
 - Unlike existing traditional directory systems, Cloud Directory does not limit organizing directory objects in a single fixed hierarchy. 
 - In Cloud Directory, you can organize directory objects into multiple hierarchies to support multiple organizational pivots and relationships across directory information. For example, a directory of users may provide a hierarchical view based on reporting structure, location, and project affiliation. Similarly, a directory of devices may have multiple hierarchical views based on its manufacturer, current owner, and physical location. With Cloud Directory, you can create directories for a variety of use cases, such as organizational charts, course catalogs, and device registries.
 
 
+## Security Bulletins
+- AWS publishes security bulletins about the latest security and privacy events with AWS services on the Security Bulletins page.
+
 ## Other Notes 
 - Per AWS Best Practices, proximity to your end users, regulatory compliance, data residency constraints, and cost are all factors you have to consider when choosing the most suitable AWS Region.
-- Security Bulletins : AWS publishes security bulletins about the latest security and privacy events with AWS services on the Security Bulletins page.
 - Account Owner : If there is a requirement to grant a DevOps team full administrative access to all resources in an AWS account, then Account owner can give
-- **Global Tables** : Name of the DynamoDB replication capability that provides fast read \ write performance for globally deployed applications 
 - AWS Systems Manager gives you visibility and control of your infrastructure on AWS. Systems Manager provides a unified user interface so you can view operational data from multiple AWS services and allows you to automate operational tasks across your AWS resources.
 - With the standard storage class you pay a per GB/month storage fee, and data transfer out of S3. oStandard-IA and One Zone-IA have a minimum capacity charge per object. Standard-IA, One Zone-IA, and Glacier also have a retrieval fee. You don’t pay for data into S3 under any storage class.
 - A cloud practitioner needs to decrease application latency and increase performance for globally distributed users, then use CloudFront and S3
 - AWS Lambda and Amazon API Gateway are both app-facing components of the AWS Serverless infrastructure
 - AWS Step Functions is an orchestration service
-- Which type of Amazon RDS automated backup allows you to restore the database with a granularity of as little as 5 minutes : Point in time
 - Which AWS service lets connected devices easily and securely interact with cloud applications and other devices : IoT Core
 - AWS Shield Advanced provides enhanced detection and includes a specialized support team for customers on Enterprise or Business support plans. The AWS DDoS Response Team (DRT) are available 24/7 and can be engaged before, during, or after a DDoS attack.
+- Amazon Elasticsearch Service is involved with operational analytics such as application monitoring, log analytics and clickstream analytics. Amazon Elasticsearch Service allows you to search, explore, filter, aggregate, and visualize your data in near real-time.
+- Which AWS service or feature helps restrict the AWS service, resources, and individual API actions the users and roles in each member account can access - AWS Org
+SCPs are used to restrict access within member accounts. For instance you can create an SCP that restricts a specific API action such as deploying a particular Amazon EC2 instance type. The policy would then prevent anyone, including administrators, from being able to launch EC2 instances using that instance type.
+- AWS Simple Monthly calculator" is incorrect. AWS Simple Monthly calculator – shows you how much you would pay in AWS if you move your resources.
+- Amazon CloudWatch Logs lets you monitor and troubleshoot your systems and applications using your existing system, application and custom log files. CloudWatch Logs can be used for real time application and system monitoring as well as long term log retention.
+-  CloudTrail is used for logging who does what in AWS by recording API calls. It is used for auditing, not performance or system operational monitoring.
+- A company has a static website hosted on an S3 bucket in an AWS Region in Asia. Although most of its users are in Asia, now it wants to drive growth globally. How can it improve the global performance of its static website, Use CloudFront
+- AWS is responsible for setting up the software licenses used in their platform. AWS makes it is easy for you by partnering with vendors like Microsoft, IBM and other vendors to simplify running many commercial software packages on your EC2 instances. For some commercial software packages that AWS does not provide such as Oracle applications you still need to obtain a license directly from the vendors.
+- Which of the following Cloud Computing deployment models eliminates the need to run and maintain physical data centers - Cloud
+- Feature enables users to sign in to their AWS accounts with their existing corporate credentials - Federation
+- The AWS Marketplace provides value to buyers in several ways:
+
+1- It simplifies software licensing and procurement with flexible pricing options and multiple deployment methods. Flexible pricing options include free trial, hourly, monthly, annual, multi-year, and BYOL.
+
+2- Customers can quickly launch pre-configured software with just a few clicks, and choose software solutions in AMI and SaaS formats, as well as other formats.
+
+3- It ensures that products are scanned periodically for known vulnerabilities, malware, default passwords, and other security-related concerns.
+
+
+To protect against data loss, you need to backup your database regularly. What is the most cost-effective storage option that provides immediate retrieval of your backups? S3
+
+You manage a blog on AWS that has different environments: development, testing, and production. What can you use to create a custom console for each environment to view and manage your resources easily? Resource Group
 
 
 
+  Anyone who has root user access keys for your AWS account has unrestricted access to all the resources in your account, including billing information. If you don't already have an access key for your AWS account root user, don't create one unless you absolutely need to. If you do have an access key for your AWS account root user, delete it. If you must keep it, rotate (change) the access key regularly.
+  
+  
+          AWS doesn't charge usage for a stopped instance, or data transfer fees. For a stopped instance AWS will only charge you for EBS storage volumes attached to the instances.
+		  
+		  
+		  
+What does AWS Cost Explorer provide to help manage your AWS spend?
+
+Forecasting capabilities have been enhanced to support twelve month forecasts (previously forecasts were limited to three months) for multiple cost metrics, including unblended and amortized costs.
+
+The AWS tool that can provide accurate estimates of AWS service costs based on your expected usage is the AWS Simple Monthly Calculator
+WS Cost Explorer forecasts your future costs based on your past usage; NOT based on your expected usage
+
+
+Inbound Traffic is  NOT a factor when estimating the cost of Amazon CloudFront?
+_Data Transfer Out
+# and type of HTTP and HTTPS requests made
+Edge loc thru which content is served
+
+ACM : purchase and deploy SSL/TLS certificates
+
+
+Which of the following factors should be considered when determining the region in which AWS Resources will be deployed? (Choose TWO)
+
+
+
+Cost and
+
+
+
+- You have just hired a skilled sys-admin to join your team. As usual, you have created a new IAM user for him to interact with AWS services. On his first day, you ask him to create snapshots of all existing Amazon EBS volumes and save them in a new Amazon S3 bucket. However, the new member reports back that he is unable to create neither EBS snapshots nor S3 buckets. What might prevent him from doing this simple task? Non explicity Deny to all users
+
+Which AWS Service offers volume discounts based on usage? S3
+
+Which of the following is NOT a factor when estimating the costs of Amazon EC2? (Choose TWO) Hosted Zones and Sec grp
+
+ S
     
 
           
