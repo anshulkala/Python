@@ -1486,33 +1486,33 @@ Phone call -> Connect --Stream-->Lex-->Lambda--> CRM
 ### Monitoring against cost plans
 
 - Billing alarms
-      - Billing data metric is stored in **us-east-1**
-      - Billing data are for overall worldwide AWS costs
-      - Its for **actual cost and not for projected cost**
-      - Intended a simple alarm (not as powerful as AWS Budgets)
+	- Billing data metric is stored in **us-east-1**
+    - Billing data are for overall worldwide AWS costs
+    - Its for **actual cost and not for projected cost**
+    - Intended a simple alarm (not as powerful as AWS Budgets)
 		  
 - Budgets
-      - **Create budget and send alarms when Cost exceeds the budget**
-      - 3 Types
-           - Usage
-           - Cost
-           - Reservation
-      - For Reserved Instance(RI)
-          - Track utilization
-          - Supports EC2, ElasticCache,RDS,RedShift
-          - Can get upto `5 SNS notifications/budget`
-          - Can filter by : Service , Linked a/c , Tag, Puschase Option, Instance Type, Region , AZ, API Operation
-          - `2 budgets are free , then $0.02/day/budget`
-          - Same options as AWS Cost Explorer 
-		  - You can also use AWS Budgets to **set reservation utilization or coverage targets and receive alerts when your utilization drops below the threshold you define**
-		  - AWS Budgets gives you the ability to set custom budgets that **alert you when your costs or usage exceed (or are forecasted to exceed) your budgeted amount.** 
-		  - You can **define a utilization threshold and receive alerts when your RI usage falls below that threshold.**
-		  - Reservation alerts are supported for Amazon EC2, Amazon RDS, Amazon Redshift, Amazon ElastiCache, and Amazon Elasticsearch reservations.         
+    - **Create budget and send alarms when Cost exceeds the budget**
+    - 3 Types
+		- Usage
+        - Cost
+        - Reservation
+	- For Reserved Instance(RI)
+        - Track utilization
+        - Supports EC2, ElasticCache,RDS,RedShift
+        - Can get upto `5 SNS notifications/budget`
+        - Can filter by : Service , Linked a/c , Tag, Puschase Option, Instance Type, Region , AZ, API Operation
+        - `2 budgets are free , then $0.02/day/budget`
+        - Same options as AWS Cost Explorer 
+		- You can also use AWS Budgets to **set reservation utilization or coverage targets and receive alerts when your utilization drops below the threshold you define**
+		- AWS Budgets gives you the ability to set custom budgets that **alert you when your costs or usage exceed (or are forecasted to exceed) your budgeted amount.** 
+		- You can **define a utilization threshold and receive alerts when your RI usage falls below that threshold.**
+		- Reservation alerts are supported for Amazon EC2, Amazon RDS, Amazon Redshift, Amazon ElastiCache, and Amazon Elasticsearch reservations.         
  ---
  
 ## AWS Trusted Advisor
 
--    No need to install anything -High level AWS account assessment
+- No need to install anything -High level AWS account assessment
 - Account assessment
 - **Analyse accounts and provide recommendations**
 - **Core checks and recommendations - all customers**
