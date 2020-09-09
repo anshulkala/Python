@@ -545,88 +545,95 @@ Using lifecycle config , storage class can be changed
 ## AWS DB
 
 ### RDS
-    - **Relational**
-          - PostGres, MySQL, Oracle, SQL Server , Aurora
-    - **Read replicas** for performance improvement
-	- **Read Replicas** improves database scalability
-	- Read Replicas features facilitates offloading of database read activity
-    - **Multi AZ (optional - need to configure)**
-    - _ + | scaling of instance size and storage
-    - **Storage backed up by EBS**
-    - Automated provisioning , OS patching
-    - **Continuous backup and restore to specific times with a granularity of as little as 5 minutes(Point in time references)**
-    - Dashboard monitoring
-    - Disadv : cannot SSH into EC2
+
+- **Relational**
+      - PostGres, MySQL, Oracle, SQL Server , Aurora
+- **Read replicas** for performance improvement
+- **Read Replicas** improves database scalability
+- Read Replicas features facilitates offloading of database read activity
+- **Multi AZ (optional - need to configure)**
+- _ + | scaling of instance size and storage
+- **Storage backed up by EBS**
+- Automated provisioning , OS patching
+- **Continuous backup and restore to specific times with a granularity of as little as 5 minutes(Point in time references)**
+- Dashboard monitoring
+- Disadv : cannot SSH into EC2
     - Maintenace windows for upgrades
 	- AWS performs DB set up and management of OS
 
 ### Aurora
-    - MySQL and PostGres
-    - **5 X perf over MySQL & 3 X perf over postGres**
-    - Storage auto grows in increments of 10 GB upto 64 TB
-    - Cost is 20 % > RDS, but more efficient
-    - Not in free tier
+
+- MySQL and PostGres
+- **5 X perf over MySQL & 3 X perf over postGres**
+- Storage auto grows in increments of 10 GB upto 64 TB
+- Cost is 20 % > RDS, but more efficient
+- Not in free tier
 
 ### Elastic Cache
-    - **Mem cached or Redis**
-    - In mem DB and high performance
-    - Low latency
-    - **Helps reduce load off database for read intensive workloads**
-	- Improves web application performance
+
+- **Mem cached or Redis**
+- In mem DB and high performance
+- Low latency
+- **Helps reduce load off database for read intensive workloads**
+- Improves web application performance
    
 ### Dynamo DB
-    - **Fully managed and highly available across 3 AZ**
-	- ** Multi AZ**
-    - No SQL
-    - **Automatically Scales to massive workloads**
-    - **Serverless**
-    - Fast and consistent in performance
-    - **Single didgit mili sec latency** - low latency retreival
-    - Low cost and auto scaling
-    - 100s of TB storage and millions of req/sec
-    - Low cost and auto scaling capabilities
-    - Integrated with IAM
-    - **K/V DB**
-    - **DynamoDB Accelerator (DynamoDB DAX)** is an in-memory cache for DynamoDB that reduces response times from milliseconds to microseconds.
-	- **Global Tables** : Name of the DynamoDB replication capability that provides fast read \ write performance for globally deployed applications. 
-	- DynamoDB global tables are ideal for massively scaled applications with globally dispersed users. 
-	- Global tables provide automatic replication to AWS Regions world-wide. 
-	- They enable you to deliver low-latency data access to your users no matter where they are located.
+
+- **Fully managed and highly available across 3 AZ**
+- ** Multi AZ**
+- No SQL
+- **Automatically Scales to massive workloads**
+- **Serverless**
+- Fast and consistent in performance
+- **Single didgit mili sec latency** - low latency retreival
+- Low cost and auto scaling
+- 100s of TB storage and millions of req/sec
+- Low cost and auto scaling capabilities
+- Integrated with IAM
+- **K/V DB**
+- **DynamoDB Accelerator (DynamoDB DAX)** is an in-memory cache for DynamoDB that reduces response times from milliseconds to microseconds.
+- **Global Tables** : Name of the DynamoDB replication capability that provides fast read \ write performance for globally deployed applications. 
+- DynamoDB global tables are ideal for massively scaled applications with globally dispersed users. 
+- Global tables provide automatic replication to AWS Regions world-wide. 
+- They enable you to deliver low-latency data access to your users no matter where they are located.
 
 ### RedShift
-    - **OLAP**
-    - **Scales to PB**
-    - MPP (Massive || Processing)
-    - Pay as u go
-    - **Based on Postgres SQL**
-    - **Load data once every hr (not every sec)**
-    - 10 X better perf than other DBS
-    - SQL interface
-    - Bi tools like AWS QuickSight and Tableau integrate with it
-    - Can be deployed at **AZ level** only
+- **OLAP**
+- **Scales to PB**
+- MPP (Massive || Processing)
+- Pay as u go
+- **Based on Postgres SQL**
+- **Load data once every hr (not every sec)**
+- 10 X better perf than other DBS
+- SQL interface
+- Bi tools like AWS QuickSight and Tableau integrate with it
+- Can be deployed at **AZ level** only
 
 ### EMR
-    - Cluster with 100 of EC2
-    - **Machine Learning / Big data/ data processing/web indexing**
-    - EMR takes care of all provisioning and config
-    - **Auto Scaling and integrated with Spot instances**
+
+- Cluster with 100 of EC2
+- **Machine Learning / Big data/ data processing/web indexing**
+- EMR takes care of all provisioning and config
+- **Auto Scaling and integrated with Spot instances**
 
 ### Athena
-    - **Query Data in S3**
-    - **Pay/ query**
-    - Output result back to S3
-    - **Fully Serverless**
-    - Secured through IAM
-    - Use Cases : Log Analytics, 1 time SQL query , serverless queries queries on S3
+
+- **Query Data in S3**
+- **Pay/ query**
+- Output result back to S3
+- **Fully Serverless**
+- Secured through IAM
+- Use Cases : Log Analytics, 1 time SQL query , serverless queries queries on S3
 
 ### DMS
-    - DB migration service
-    - **Quickly and securely migrate DB to AWS**
-	- Resilinet
-	- Self-healing
-    - Source DB remains available during migration
-    - Spports homogenous and heterogeneous migration
-	- The AWS Database Migration Service can migrate your data to and from the most widely used commercial and open-source databases.
+
+- DB migration service
+- **Quickly and securely migrate DB to AWS**
+- Resilinet
+- Self-healing
+- Source DB remains available during migration
+- Spports homogenous and heterogeneous migration
+- The AWS Database Migration Service can migrate your data to and from the most widely used commercial and open-source databases.
 
 ---
 
