@@ -1412,11 +1412,11 @@ Phone call -> Connect --Stream-->Lex-->Lambda--> CRM
 ---
 
 ### Pricing models
-    - Pay as u go : pay for what u use, remain agile, responsive, meet scale demands
-    - Save when you reserve: minimize risks, predictably manage budgets, comply with long term requirements
-          - Reservations are available for EC2 Reserved Instances, DynamoDB Reserved Capacity, ElaticCache Resrved Nodes, RDS Reserved Instance, Redshift Reserved Nodes
-    - Pay less by using more : Volume based discount
-    - Pay less as AWS grows   
+- Pay as u go : pay for what u use, remain agile, responsive, meet scale demands
+- Save when you reserve: minimize risks, predictably manage budgets, comply with long term requirements
+      - Reservations are available for EC2 Reserved Instances, DynamoDB Reserved Capacity, ElaticCache Resrved Nodes, RDS Reserved Instance, Redshift Reserved Nodes
+- Pay less by using more : Volume based discount
+- Pay less as AWS grows   
 ---
 
 ## Billing and Costing Tools
@@ -1477,21 +1477,22 @@ Phone call -> Connect --Stream-->Lex-->Lambda--> CRM
 	- Provides recommendation on savings plan
 
 ### Monitoring against cost plans
-    - Billing alarms
-          - Billing data metric is stored in **us-east-1**
-          - Billing data are for overall worldwide AWS costs
-          - Its for **actual cost and not for projected cost**
-          - Intended a simple alarm (not as powerful as AWS Budgets)
+
+- Billing alarms
+      - Billing data metric is stored in **us-east-1**
+      - Billing data are for overall worldwide AWS costs
+      - Its for **actual cost and not for projected cost**
+      - Intended a simple alarm (not as powerful as AWS Budgets)
 		  
-    - Budgets
-          - **Create budget and send alarms when Cost exceeds the budget**
-          - 3 Types
-               - Usage
-               - Cost
-               - Reservation
-          - For Reserved Instance(RI)
-               - Track utilization
-               - Supports EC2, ElasticCache,RDS,RedShift
+- Budgets
+      - **Create budget and send alarms when Cost exceeds the budget**
+      - 3 Types
+           - Usage
+           - Cost
+           - Reservation
+      - For Reserved Instance(RI)
+          - Track utilization
+          - Supports EC2, ElasticCache,RDS,RedShift
           - Can get upto `5 SNS notifications/budget`
           - Can filter by : Service , Linked a/c , Tag, Puschase Option, Instance Type, Region , AZ, API Operation
           - `2 budgets are free , then $0.02/day/budget`
@@ -1503,32 +1504,34 @@ Phone call -> Connect --Stream-->Lex-->Lambda--> CRM
  ---
  
 ## AWS Trusted Advisor
-    No need to install anything -High level AWS account assessment
-    - Account assessment
-    - **Analyse accounts and provide recommendations**
-    - **Core checks and recommendations - all customers**
-    - Enable **weekly email notification from console**
-	- AWS Trusted Advisor **can check Amazon Elastic Block Store (Amazon EBS) volume configurations and warns when volumes appear to be underused.**
-	- Charges begin when a volume is created. If a volume remains unattached or has very low write activity (excluding boot volumes) for a period of time, the volume is probably not being used
-    - Full Trusted advisor
-          - Business and Enterprise support plans
-          - Ability to **set cloudwatch alarms when reaching limits**
-          - **Programmatic access using AWS Support APIs**
+
+-    No need to install anything -High level AWS account assessment
+- Account assessment
+- **Analyse accounts and provide recommendations**
+- **Core checks and recommendations - all customers**
+- Enable **weekly email notification from console**
+- AWS Trusted Advisor **can check Amazon Elastic Block Store (Amazon EBS) volume configurations and warns when volumes appear to be underused.**
+- Charges begin when a volume is created. If a volume remains unattached or has very low write activity (excluding boot volumes) for a period of time, the volume is probably not being used
+- Full Trusted advisor
+  - Business and Enterprise support plans
+  - Ability to **set cloudwatch alarms when reaching limits**
+  - **Programmatic access using AWS Support APIs**
 
 ### Examples
-    - **Cost Optimization**
-          - Low utilization of Ec2 instances , idle LB , under utlized ELB
-          - Reserved instance and savings plan optimizations
-    - **Performance**
-          - High utilization EC2 instances, CloudFront , CDN optimizations
-          - EC2 to EBS thruput optimiations , Alias Record Recommendations
-    - **Security**
-          - MFA enabled on root, IAM key rotation , exposed Access Keys
-          - S3 bucket permission for public access, security groups with unrestricted ports
-    - **Fault Tolerance**
-          - EBS snapshots age , AZ Balance
-          - ASG Multi AZ ,RDS Multi AZ, ELB Config
-    - **Service Limits**
+
+- **Cost Optimization**
+  - Low utilization of Ec2 instances , idle LB , under utlized ELB
+  - Reserved instance and savings plan optimizations
+- **Performance**
+  - High utilization EC2 instances, CloudFront , CDN optimizations
+  - EC2 to EBS thruput optimiations , Alias Record Recommendations
+- **Security**
+  - MFA enabled on root, IAM key rotation , exposed Access Keys
+  - S3 bucket permission for public access, security groups with unrestricted ports
+- **Fault Tolerance**
+  - EBS snapshots age , AZ Balance
+  - ASG Multi AZ ,RDS Multi AZ, ELB Config
+- **Service Limits**
           
 ---
   
@@ -1548,6 +1551,7 @@ AWS Ecosystem
 - **AWS Personal Health dashboard** : personalized view of health servive and alers when the resources are impacted
 
 ### Developer
+
 - Basic Support Plan +
 - **Business hr email access to cloud support associates**
 - **Unlimited cases/1  primary contact**
@@ -1557,6 +1561,7 @@ AWS Ecosystem
 - Supports general guidance on how services can be used for various use cases, workloads, or applications
 
 ### Business
+
 - Intended to be used when you have **Prod workloads**
 - **Trusted Advisor - Full set of check + API access**
 - **24 X 7 phone, email chat access to Cloud Support Engineers**
@@ -1598,16 +1603,16 @@ AWS Ecosystem
 Integrate Microsoft AD in AWS
 
 ### AWS Managed Microsoft AD
-    - Create ur own AD in AWS , manage user locally , supports MFA
-    - Establish trust connection wid ur on prem AD
+- Create ur own AD in AWS , manage user locally , supports MFA
+- Establish trust connection wid ur on prem AD
 
 ### AD Connector
-    - Directory gateway (proxy) to redirect to your on prem AD
-    - Users are managed on On prem AD
+- Directory gateway (proxy) to redirect to your on prem AD
+- Users are managed on On prem AD
 
 ### Simple AD
-    - AD compatible managed service on AWS
-    - Cannot be joined with on-prem AD
+- AD compatible managed service on AWS
+- Cannot be joined with on-prem AD
 
 ---
 
@@ -1798,14 +1803,6 @@ eg-
   - CloudFormation Templates
   - SaaS
   - Containers
-- If you buy , it goes to AWS bill
-The AWS Marketplace provides value to buyers in several ways:
-
-1- It simplifies software licensing and procurement with flexible pricing options and multiple deployment methods. Flexible pricing options include free trial, hourly, monthly, annual, multi-year, and BYOL.
-
-2- Customers can quickly launch pre-configured software with just a few clicks, and choose software solutions in AMI and SaaS formats, as well as other formats.
-
-3- It ensures that products are scanned periodically for known vulnerabilities, malware, default passwords, and other security-related concerns.
 
 ## AWS Training
 - Digital and Classroom
@@ -1914,59 +1911,5 @@ SCPs are used to restrict access within member accounts. For instance you can cr
 - AWS is responsible for setting up the software licenses used in their platform. AWS makes it is easy for you by partnering with vendors like Microsoft, IBM and other vendors to simplify running many commercial software packages on your EC2 instances. For some commercial software packages that AWS does not provide such as Oracle applications you still need to obtain a license directly from the vendors.
 - Which of the following Cloud Computing deployment models eliminates the need to run and maintain physical data centers - Cloud
 - Feature enables users to sign in to their AWS accounts with their existing corporate credentials - Federation
-- The AWS Marketplace provides value to buyers in several ways:
-
-1- It simplifies software licensing and procurement with flexible pricing options and multiple deployment methods. Flexible pricing options include free trial, hourly, monthly, annual, multi-year, and BYOL.
-
-2- Customers can quickly launch pre-configured software with just a few clicks, and choose software solutions in AMI and SaaS formats, as well as other formats.
-
-3- It ensures that products are scanned periodically for known vulnerabilities, malware, default passwords, and other security-related concerns.
-
-
-To protect against data loss, you need to backup your database regularly. What is the most cost-effective storage option that provides immediate retrieval of your backups? S3
-
-You manage a blog on AWS that has different environments: development, testing, and production. What can you use to create a custom console for each environment to view and manage your resources easily? Resource Group
-
-
-
-  Anyone who has root user access keys for your AWS account has unrestricted access to all the resources in your account, including billing information. If you don't already have an access key for your AWS account root user, don't create one unless you absolutely need to. If you do have an access key for your AWS account root user, delete it. If you must keep it, rotate (change) the access key regularly.
-  
-  
-          AWS doesn't charge usage for a stopped instance, or data transfer fees. For a stopped instance AWS will only charge you for EBS storage volumes attached to the instances.
-		  
-		  
-		  
-What does AWS Cost Explorer provide to help manage your AWS spend?
-
-Forecasting capabilities have been enhanced to support twelve month forecasts (previously forecasts were limited to three months) for multiple cost metrics, including unblended and amortized costs.
-
-The AWS tool that can provide accurate estimates of AWS service costs based on your expected usage is the AWS Simple Monthly Calculator
-WS Cost Explorer forecasts your future costs based on your past usage; NOT based on your expected usage
-
-
-Inbound Traffic is  NOT a factor when estimating the cost of Amazon CloudFront?
-_Data Transfer Out
-# and type of HTTP and HTTPS requests made
-Edge loc thru which content is served
-
-ACM : purchase and deploy SSL/TLS certificates
-
-
-Which of the following factors should be considered when determining the region in which AWS Resources will be deployed? (Choose TWO)
-
-
-
-Cost and
-
-
-
-- You have just hired a skilled sys-admin to join your team. As usual, you have created a new IAM user for him to interact with AWS services. On his first day, you ask him to create snapshots of all existing Amazon EBS volumes and save them in a new Amazon S3 bucket. However, the new member reports back that he is unable to create neither EBS snapshots nor S3 buckets. What might prevent him from doing this simple task? Non explicity Deny to all users
-
-Which AWS Service offers volume discounts based on usage? S3
-
-Which of the following is NOT a factor when estimating the costs of Amazon EC2? (Choose TWO) Hosted Zones and Sec grp
-
- S
-    
 
           
