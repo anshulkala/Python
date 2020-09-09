@@ -759,22 +759,22 @@ Banefits :
 - Repeat across regions and accounts
 
 ### Cost
-    - Each resource within the stack is tagged with a identifier so that you can easly see how much stack costs you
-    - Saving strategy : In dev , you can automation deletion of templates at `5 pm` and recreate at `8 am`
+- Each resource within the stack is tagged with a identifier so that you can easly see how much stack costs you
+- Saving strategy : In dev , you can automation deletion of templates at `5 pm` and recreate at `8 am`
 
 ### Productivity
-    - Ability to recreate and destory resouces on cloud on the fly
-    - Automated generation of diagrams for ur template
-    - Declerative Programming - No need to figure out ordering and orchestration
+- Ability to recreate and destory resouces on cloud on the fly
+- Automated generation of diagrams for ur template
+- Declerative Programming - No need to figure out ordering and orchestration
 
 ### Dont re-invent wheel
-    - Leverage existing documenation
-    - Levergae existing templates
+- Leverage existing documenation
+- Levergae existing templates
 
 ### Suppport
-    - Support all resources
-    - You can use custom resources for the resources that are not supported
-	- **Can be used to deploy to many AWS regions and accounts**
+- Support all resources
+- You can use custom resources for the resources that are not supported
+- **Can be used to deploy to many AWS regions and accounts**
 
 ---
 
@@ -800,9 +800,9 @@ Banefits :
 - It cannot be used to automatically deploy code to an Amazon EC2 instance.
 
 ### 3 Architectural modes
-    Single instance deployment : dev
-    LB + ASG : prod or pre-prod
-    ASG only : Great for Non web app in prod(workers etc)
+- Single instance deployment : dev
+- LB + ASG : prod or pre-prod
+- ASG only : Great for Non web app in prod(workers etc)
 
 ### Platforms
 - Single container docker
